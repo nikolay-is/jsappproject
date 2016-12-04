@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import Observer from '../../utilities/observer';
+import Observer from '../../utilities/observer';
 // import ERR from '../../utilities/err';
 import CreateTestUserForm from './CreateTest-Userform-View.js';
 
@@ -9,29 +9,50 @@ class CreateTest extends React.Component {
     super(props);
 
     this.state = {
-      isLoggedIn: window.sessionStorage.getItem('userId'),
+      isLoggedIn: window.sessionStorage.getItem('userId') && true,
       busy: false,
 
       title: '',
       description: '',
       questions: [{
         id: 0,
-        image: undefined,
-        0: '', 1: '', 2: '', 3: '',
-        answer: undefined
+        image: '',
+        a0: '', a1: '', a2: '', a3: '',
+        answer: ''
       }]
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
     this.onAddQuestion = this.onAddQuestion.bind(this);
+    this.onQuestionChange = this.onQuestionChange.bind(this);
+  }
+
+  componentDidMount() {
+    console.log('did mount')
+    Observer.onQuestionChange = this.onQuestionChange;
+  }
+
+  onQuestionChange(ev) {
+    let questions = this.state.questions;
+    //console.dir(questions);
+    let idx = Number(ev.target.attributes['data-id'].value);
+    //console.log(ev.target.attributes['data-id'].nodeValue);
+    console.log(idx);
+    questions[idx][ev.target.name] = ev.target.value;
+    //console.log(nextState.questions[idx][ev.target.name]);
+    this.setState({
+      questions: questions
+    });
+
+    ev.preventDefault();    
   }
 
   onChangeHandler(ev) {
     let nextState = {};
     nextState[ev.target.name] = ev.target.value;
     this.setState(nextState);
-
+    
     ev.preventDefault();
   }
 
@@ -40,14 +61,13 @@ class CreateTest extends React.Component {
   }
 
   onAddQuestion(ev) {
-    console.log('In');
     let questions = this.state.questions;
     let id = questions[questions.length - 1].id + 1;
     questions.push({
       id: id,
-      image: undefined,
-      0: '', 1: '', 2: '', 3: '',
-      answer: undefined
+      image: '',
+      a0: '', a1: '', a2: '', a3: '',
+      answer: ''
     });
 
     this.setState({ questions: questions });

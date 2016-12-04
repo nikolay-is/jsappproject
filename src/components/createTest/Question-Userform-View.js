@@ -1,10 +1,12 @@
 import React from 'react';
+import Observer from '../../utilities/observer';
 
 class Question extends React.Component {
   render() {
+    console.log('question render');
     return (
-      <fieldset>
-        <legend>Question { this.props.idx }</legend>
+      <fieldset key={this.props.idx}>
+        <legend>Question { this.props.idx + 1}</legend>
         <div className='form-container col-sm-12'>
           <form className='form-horizontal' onSubmit={this.props.onSubmit}>
 
@@ -18,8 +20,9 @@ class Question extends React.Component {
                     id='image'
                     name='image'
                     ref='inputImage'
-                    disabled={this.props.busy}
-                    onChange={this.props.onChange}
+                    data-id={this.props.idx} 
+                    disabled={false}
+                    onChange={Observer.onQuestionChange}
                   />
                 </div>
             </div><br />
@@ -34,9 +37,10 @@ class Question extends React.Component {
                     id='a0'
                     name='a0'
                     ref='inputA0'
+                    data-id={this.props.idx} 
                     disabled={false}
                     value={this.props.question['0']}
-                    onChange={false}
+                    onChange={Observer.onQuestionChange}
                   />
                 </div>
             </div><br />
@@ -51,9 +55,10 @@ class Question extends React.Component {
                     id='a1'
                     name='a1'
                     ref='inputA1'
+                    data-id={this.props.idx} 
                     disabled={false}
                     value={this.props.question['1']}
-                    onChange={false}
+                    onChange={Observer.onQuestionChange}
                   />
                 </div>
             </div><br />
@@ -68,9 +73,10 @@ class Question extends React.Component {
                     id='a2'
                     name='a2'
                     ref='inputA2'
+                    data-id={this.props.idx} 
                     disabled={false}
                     value={this.props.question['2']}
-                    onChange={false}
+                    onChange={Observer.onQuestionChange}
                   />
                 </div>
             </div><br />
@@ -85,9 +91,10 @@ class Question extends React.Component {
                     id='a3'
                     name='a3'
                     ref='inputA3'
+                    data-id={this.props.idx} 
                     disabled={false}
                     value={this.props.question['3']}
-                    onChange={false}
+                    onChange={Observer.onQuestionChange}
                   />
                 </div>
             </div><br />
@@ -98,12 +105,13 @@ class Question extends React.Component {
                   <div className='input-group-addon'>#</div>
                   <select
                     className='form-control'
-                    id='correct'
-                    name='correct'
-                    ref='inputCorrect'
+                    id='answer'
+                    name='answer'
+                    ref='inputAnswer'
+                    data-id={this.props.idx} 
                     disabled={false}
                     value={this.props.answer}
-                    onChange={false}>
+                    onChange={Observer.onQuestionChange}>
                     <option>Answer 1</option>
                     <option>Answer 2</option>
                     <option>Answer 3</option>

@@ -50,7 +50,7 @@ class CreateTestUserForm extends React.Component {
           </div><br />
 
           {
-            this.props.questions.map((q, idx) => <Question question={q} idx={idx + 1}/>)
+            this.props.questions.map((q, idx) => <Question key={idx} question={q} idx={idx} />)
           }
 
           <div className='form-group'>
