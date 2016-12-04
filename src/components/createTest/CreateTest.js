@@ -2,6 +2,7 @@ import React from 'react';
 
 import Observer from '../../utilities/observer';
 // import ERR from '../../utilities/err';
+import { create } from '../../models/Test';
 import CreateTestUserForm from './CreateTest-Userform-View.js';
 
 class CreateTest extends React.Component {
@@ -16,9 +17,8 @@ class CreateTest extends React.Component {
       description: '',
       questions: [{
         id: 0,
-        image: '',
-        a0: '', a1: '', a2: '', a3: '',
-        answer: ''
+        question: '',
+        a0: '', a1: '', a2: '', a3: '', answer: ''
       }]
     };
 
@@ -35,15 +35,10 @@ class CreateTest extends React.Component {
 
   onQuestionChange(ev) {
     let questions = this.state.questions;
-    //console.dir(questions);
     let idx = Number(ev.target.attributes['data-id'].value);
-    //console.log(ev.target.attributes['data-id'].nodeValue);
-    console.log(idx);
     questions[idx][ev.target.name] = ev.target.value;
-    //console.log(nextState.questions[idx][ev.target.name]);
-    this.setState({
-      questions: questions
-    });
+
+    this.setState({ questions: questions });
 
     ev.preventDefault();    
   }
@@ -57,6 +52,20 @@ class CreateTest extends React.Component {
   }
 
   onSubmitHandler(ev) {
+    if ( !(this.state.title.length && this.state.description.length && this.state.questions.length >= 5) ) {
+      alert('Bad Test data');
+    } else {
+      this.setState({ busy: true });
+
+      create({ title: this.state.title, description: this.state.description, questions: this.state.questions })
+        .then(result => {
+          this.context.router.push('/');
+        })
+        .catch(err => {
+          console.error(err);
+          this.setState({ busy: false });
+        });
+    }
     ev.preventDefault();
   }
 
@@ -65,9 +74,8 @@ class CreateTest extends React.Component {
     let id = questions[questions.length - 1].id + 1;
     questions.push({
       id: id,
-      image: '',
-      a0: '', a1: '', a2: '', a3: '',
-      answer: ''
+      question: '',
+      a0: '', a1: '', a2: '', a3: '', answer: ''
     });
 
     this.setState({ questions: questions });

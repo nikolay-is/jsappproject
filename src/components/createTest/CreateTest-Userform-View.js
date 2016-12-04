@@ -11,7 +11,7 @@ class CreateTestUserForm extends React.Component {
   render() {
     return (
       <div className='form-container col-sm-12'>
-        <form className='form-horizontal' onSubmit={this.props.onSubmit}>
+        <form className='form-horizontal' onSubmit={this.props.onSubmit} >
 
           <div className='form-group'>
             <label htmlFor='title' className='col-sm-3 control-label title'>Title</label>
@@ -50,7 +50,7 @@ class CreateTestUserForm extends React.Component {
           </div><br />
 
           {
-            this.props.questions.map((q, idx) => <Question key={idx} question={q} idx={idx} />)
+            this.props.questions.map((q, idx) => <Question disabled={this.props.busy} key={idx} question={q} idx={idx} />)
           }
 
           <div className='form-group'>

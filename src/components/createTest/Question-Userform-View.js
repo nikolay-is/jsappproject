@@ -9,18 +9,19 @@ class Question extends React.Component {
         <legend>Question { this.props.idx + 1}</legend>
 
             <div className='form-group'>
-              <label htmlFor='image' className='col-sm-3 control-label image'>Image</label>
-                <div className='input-group col-sm-4'>
+              <label htmlFor='question' className='col-sm-3 control-label question'>Question</label>
+                <div className='input-group col-sm-8'>
                   <div className='input-group-addon'>#</div>
-                  <input
-                    type='file'
+                  <textarea
+                    rows='2'
                     className='form-control'
-                    id='image'
-                    name='image'
-                    ref='inputImage'
+                    id='question'
+                    name='question'
+                    ref='inputQuestion'
                     data-id={this.props.idx} 
-                    disabled={false}
+                    disabled={this.props.busy}
                     onChange={Observer.onQuestionChange}
+                    spellCheck={false}
                   />
                 </div>
             </div><br />
@@ -36,7 +37,7 @@ class Question extends React.Component {
                     name='a0'
                     ref='inputA0'
                     data-id={this.props.idx} 
-                    disabled={false}
+                    disabled={this.props.busy}
                     value={this.props.question['0']}
                     onChange={Observer.onQuestionChange}
                   />
@@ -54,7 +55,7 @@ class Question extends React.Component {
                     name='a1'
                     ref='inputA1'
                     data-id={this.props.idx} 
-                    disabled={false}
+                    disabled={this.props.busy}
                     value={this.props.question['1']}
                     onChange={Observer.onQuestionChange}
                   />
@@ -72,7 +73,7 @@ class Question extends React.Component {
                     name='a2'
                     ref='inputA2'
                     data-id={this.props.idx} 
-                    disabled={false}
+                    disabled={this.props.busy}
                     value={this.props.question['2']}
                     onChange={Observer.onQuestionChange}
                   />
@@ -90,7 +91,7 @@ class Question extends React.Component {
                     name='a3'
                     ref='inputA3'
                     data-id={this.props.idx} 
-                    disabled={false}
+                    disabled={this.props.busy}
                     value={this.props.question['3']}
                     onChange={Observer.onQuestionChange}
                   />
@@ -107,7 +108,7 @@ class Question extends React.Component {
                     name='answer'
                     ref='inputAnswer'
                     data-id={this.props.idx} 
-                    disabled={false}
+                    disabled={this.props.busy}
                     value={this.props.answer}
                     onChange={Observer.onQuestionChange}>
                     <option>Answer 1</option>
@@ -127,8 +128,7 @@ Question.propTypes = {
   busy: React.PropTypes.bool.isRequired,
   question: React.PropTypes.object.isRequired,
   idx: React.PropTypes.number.isRequired,
-  // onChange: React.PropTypes.func.isRequired,
-  // onSubmit: React.PropTypes.func.isRequired
+  onChange: React.PropTypes.func
 }
 
 Question.defaultProps = {

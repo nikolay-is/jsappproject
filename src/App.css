@@ -52,6 +52,29 @@ h2 {
   vertical-align: middle;
 }
 
+/* Home */
+div.testList {
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid transparent;
+  box-shadow: 2px 2px 5px black;
+  border-radius: 4px;
+  padding: 25px 50px;
+  font-size: 1.2em;
+  background-color: rgba(200, 100, 100, .3);
+}
+
+div.test {
+  margin: 10px 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  box-shadow: 2px 2px 3px black;
+}
+
+div.test > .description {
+  margin: 0 0 0 25px;
+}
+
 /* Forms */
 .form-container {
   text-align: left;
@@ -80,7 +103,6 @@ input[type='text'], input[type='email'], input[type='password'] {
 
 textarea {
   resize: none;
-  spellcheck: false;
 }
 
 input[type='submit'] {
