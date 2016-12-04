@@ -1,8 +1,8 @@
 const Kinvey = {
   production: {
       baseUrl: 'https://baas.kinvey.com/',
-      appId: '',
-      appSecret: '',
+      appId: 'kid_BJc95O_Mg',
+      appSecret: '4a600d13efcd47b19371e901824a416b',
       collections: {
         users: 'users',
         tests: 'tests',

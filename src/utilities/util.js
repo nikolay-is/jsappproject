@@ -1,7 +1,7 @@
 // import { jquery as $ } from '../../node_modules/jquery/dist/jquery.min';
 import $ from 'jquery';
 
-const env = process.env.NODE_ENV || 'development';
+const env = 'production';
 import config from '../config/kinvey.config';
 const Kinvey = config[env];
 
