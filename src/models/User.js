@@ -1,4 +1,4 @@
-import { httpGET, httpPOST } from '../utilities/util';
+import { httpPOST } from '../utilities/util';
 
 import ERR from '../utilities/err';
 

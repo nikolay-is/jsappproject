@@ -28,7 +28,7 @@ class CreateTest extends React.Component {
     this.onQuestionChange = this.onQuestionChange.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     console.log('did mount')
     Observer.onQuestionChange = this.onQuestionChange;
   }
