@@ -7,8 +7,6 @@ class Question extends React.Component {
     return (
       <fieldset key={this.props.idx}>
         <legend>Question { this.props.idx + 1}</legend>
-        <div className='form-container col-sm-12'>
-          <form className='form-horizontal' onSubmit={this.props.onSubmit}>
 
             <div className='form-group'>
               <label htmlFor='image' className='col-sm-3 control-label image'>Image</label>
@@ -120,8 +118,6 @@ class Question extends React.Component {
                 </div>
             </div><br />
 
-          </form>
-        </div>
       </fieldset>
     );
   }
