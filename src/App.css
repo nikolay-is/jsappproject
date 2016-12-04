@@ -10,7 +10,8 @@ body {
   background-color: transparent;
   background-image: url('/christmas.jpg');
   background-size: 100%;
-  background-repeat: no-repeat;
+  /*background-repeat: no-repeat;*/
+  background-repeat: repeat-y;
 }
 
 h2 {
@@ -74,6 +75,11 @@ label {
 
 input[type='text'], input[type='email'], input[type='password'] {
   text-indent: 10px;
+}
+
+textarea {
+  resize: none;
+  spellcheck: false;
 }
 
 input[type='submit'] {

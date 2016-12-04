@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import App from './App';
 import Home from './components/home/Home';
+import CreateTest from './components/createTest/CreateTest';
 import Register from './components/register/Register';
 import Login from './components/login/Login';
 import About from './components/about/About';
@@ -15,6 +16,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={Home} />
+      <Route path='createTest' component={CreateTest} />
       <Route path='register' component={Register} />
       <Route path='login' component={Login} />
       <Route path='about' component={About} />

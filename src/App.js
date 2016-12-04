@@ -53,6 +53,9 @@ class App extends React.Component {
       <div className='container'>
         <Header isLoggedIn={this.state.isLoggedIn} currentUser={this.state.userName}>
           <Link to='/' className='btn btn-default'>Home</Link>
+          { this.state.isLoggedIn &&
+            <Link to='/createTest' className='btn btn-default'>Create A Test</Link>
+          }
           { !this.state.isLoggedIn &&
             <Link to='/login' className='btn btn-success'>Login</Link>
           }
