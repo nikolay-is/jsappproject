@@ -5,6 +5,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import App from './App';
 import Home from './components/home/Home';
 import CreateTest from './components/createTest/CreateTest';
+import TestDetails from './components/createTest/TestDetails';
 import Register from './components/register/Register';
 import Login from './components/login/Login';
 import About from './components/about/About';
@@ -17,6 +18,8 @@ ReactDOM.render(
     <Route path='/' component={App}>
       <IndexRoute component={Home} />
       <Route path='createTest' component={CreateTest} />
+      <Route path='testDetails' component={TestDetails} />
+      <Route path="testDetails/:testId" component={TestDetails}/>
       <Route path='register' component={Register} />
       <Route path='login' component={Login} />
       <Route path='about' component={About} />

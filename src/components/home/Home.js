@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { getTests } from '../../models/Test';
+import {Link} from 'react-router';
 
 class Home extends React.Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class Home extends React.Component {
             return <div className='test col-sm-7' key={test._id}>
               <p><strong>{test.title}</strong></p>
               <p className='description'>{test.description}</p>
+               <Link to={"/testDetails/" + test._id}>Go to test details</Link>
             </div>
           })
         }
