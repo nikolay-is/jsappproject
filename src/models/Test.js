@@ -28,6 +28,14 @@ function getTests() {
   })
 }
 
+function loadTestDetails(testId) {
+  return new Promise((resolve, reject) => {
+    httpGET('appdata', 'tests/' + testId, false)
+      .then(result => resolve(result))
+      .catch(err => reject(err));
+  })
+}
+
 // function userRegister(username, password, email) {
 //   if (!validate(username, p_username))
 //     return new Promise((resolve, reject) => reject(ERR.BAD_USERNAME));
@@ -49,4 +57,4 @@ function getTests() {
 //   return regex.test(what);
 // }
 
-export { getTests, create };
+export {loadTestDetails, getTests, create };

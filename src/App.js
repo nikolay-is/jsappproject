@@ -39,8 +39,8 @@ class App extends React.Component {
 
   onLogout() {
     userLogout()
-      .then(result => {
-        if (result) window.sessionStorage.clear();
+      .then(() => {
+        window.sessionStorage.clear();
 
         this.checkUserCredentials();
         this.context.router.push('/');

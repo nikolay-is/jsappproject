@@ -75,6 +75,18 @@ div.test > .description {
   margin: 0 0 0 25px;
 }
 
+/* Test Details */
+#test-details {
+
+}
+
+.test-details-title {
+}
+
+.test-details-description{
+
+}
+
 /* Forms */
 .form-container {
   text-align: left;

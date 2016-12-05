@@ -6,6 +6,7 @@ import App from './App';
 import Home from './components/home/Home';
 import DoTest from './components/doTest/DoTest';
 import CreateTest from './components/createTest/CreateTest';
+import TestDetails from './components/createTest/TestDetails';
 import Register from './components/register/Register';
 import Login from './components/login/Login';
 import About from './components/about/About';
@@ -19,6 +20,10 @@ ReactDOM.render(
       <IndexRoute component={Home} />
       <Route path='test/:id' component={DoTest} />
       <Route path='createTest' component={CreateTest} />
+      <Route path="tests/:testId" component={TestDetails}>
+        <Route path="details" component={TestDetails} />
+        <Route path="perform" component={TestDetails} />
+      </Route>
       <Route path='register' component={Register} />
       <Route path='login' component={Login} />
       <Route path='about' component={About} />
