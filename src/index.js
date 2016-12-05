@@ -18,8 +18,10 @@ ReactDOM.render(
     <Route path='/' component={App}>
       <IndexRoute component={Home} />
       <Route path='createTest' component={CreateTest} />
-      <Route path='testDetails' component={TestDetails} />
-      <Route path="testDetails/:testId" component={TestDetails}/>
+      <Route path="tests/:testId" component={TestDetails}>
+        <Route path="details" component={TestDetails} />
+        <Route path="perform" component={TestDetails} />
+      </Route>
       <Route path='register' component={Register} />
       <Route path='login' component={Login} />
       <Route path='about' component={About} />

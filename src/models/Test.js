@@ -29,7 +29,6 @@ function getTests() {
 }
 
 function loadTestDetails(testId) {
-  console.log("load details");
   return new Promise((resolve, reject) => {
     httpGET('appdata', 'tests/' + testId, false)
       .then(result => resolve(result))

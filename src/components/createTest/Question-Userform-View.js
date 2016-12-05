@@ -3,7 +3,6 @@ import Observer from '../../utilities/observer';
 
 class Question extends React.Component {
   render() {
-    console.log('question render');
     return (
       <fieldset key={this.props.idx}>
         <legend>Question { this.props.idx + 1}</legend>

@@ -27,17 +27,19 @@ class Home extends React.Component {
     return (
       <div>
         <h2>Home</h2>
-        <div className='testList col-sm-12'>
-        {
-          this.state.tests.map(test => {
-            return <div className='test col-sm-7' key={test._id}>
-              <p><strong>{test.title}</strong></p>
-              <p className='description'>{test.description}</p>
-               <Link to={"/testDetails/" + test._id}>Go to test details</Link>
+          { window.sessionStorage.getItem('userId') &&
+            <div className='testList col-sm-12'>
+            {
+              this.state.tests.map(test => {
+                return <div className='test col-sm-7' key={test._id}>
+                  <p><strong>{test.title}</strong></p>
+                  <p className='description'>{test.description}</p>
+                  <Link to={"/tests/" + test._id + "/details"}>Go to test details</Link>
+                </div>
+              })
+            }
             </div>
-          })
-        }
-        </div>
+          }
       </div>
     );
   }
