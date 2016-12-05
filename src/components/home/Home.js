@@ -8,6 +8,7 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
+      isLoggedIn: window.sessionStorage.getItem('userId') || undefined,
       tests: []
     }
   }
@@ -15,12 +16,13 @@ class Home extends React.Component {
   componentWillMount() {
     let testList = [];
 
-    getTests()
-      .then(tests => {
-        testList = tests;
-        this.setState({ tests: testList });
-      })
-      .catch(err => console.error(err));
+    if (this.state.isLoggedIn)
+      getTests()
+        .then(tests => {
+          testList = tests;
+          this.setState({ tests: testList });
+        })
+        .catch(err => console.error(err));
   }
 
   render() {
