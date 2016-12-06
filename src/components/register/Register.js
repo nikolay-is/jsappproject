@@ -73,6 +73,7 @@ class Register extends React.Component {
     window.sessionStorage.setItem('userId', userId);
     window.sessionStorage.setItem('userName', userName);
     window.sessionStorage.setItem('authToken', authToken);
+    window.sessionStorage.setItem('tests', []);
   }
 
   render() {

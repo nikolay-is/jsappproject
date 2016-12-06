@@ -53,11 +53,22 @@ TestDetailsUserForm.contextTypes = {
 
 TestDetailsUserForm.propTypes = {
   busy: React.PropTypes.bool.isRequired,
-  test: React.PropTypes.object.isRequired
+
+  description: React.PropTypes.string,
+  questionsCount: React.PropTypes.number.isRequired,
+  total_participants: React.PropTypes.number.isRequired,
+  top_user: React.PropTypes.string.isRequired,
+  top_score: React.PropTypes.number.isRequired,
+  best_time: React.PropTypes.number.isRequired,
+
+  backButtonPressed: React.PropTypes.func.isRequired,
+  startTest: React.PropTypes.func.isRequired,
+  previewTest: React.PropTypes.func.isRequired
 }
 
 TestDetailsUserForm.defaultProps = {
-  busy: false
+  busy: false,
+  description: ''
 }
 
 export default TestDetailsUserForm;

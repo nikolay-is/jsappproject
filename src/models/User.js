@@ -1,4 +1,4 @@
-import { httpPOST } from '../utilities/util';
+import { httpPOST, httpGET } from '../utilities/util';
 
 import ERR from '../utilities/err';
 
@@ -31,7 +31,12 @@ function userRegister(username, password, email) {
     return new Promise((resolve, reject) => reject(ERR.BAD_EMAIL));
 
   return new Promise((resolve, reject) => {
-    httpPOST('user', '', true, { username: username, password: password, email: email })
+    httpPOST('user', '', true, {
+      username: username,
+      password: password,
+      email: email,
+      tests: []
+    })
       .then(registeredUser => resolve(registeredUser))
       .catch(err => reject(err));
   });
@@ -45,8 +50,16 @@ function userLogout() {
   });
 }
 
+function getUserTests(id) {
+  return new Promise((resolve, reject) => {
+    httpGET('user', id, false)
+      .then(userData => resolve(userData.tests || []))
+      .catch(err => reject(err));
+  });
+}
+
 function validate(what, regex) {
   return regex.test(what);
 }
 
-export { userLogin, userRegister, userLogout };
+export { userLogin, userRegister, userLogout, getUserTests };

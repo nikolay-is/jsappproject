@@ -2,7 +2,7 @@ import React from 'react';
 
 import Observer from '../../utilities/observer';
 import ERR from '../../utilities/err';
-import { loadTestDetails, submitResult, lockTestForUser, updateTestStats } from '../../models/Test';
+import { loadTestDetails, submitResult, lockTestForUser, updateTestStats, updateUserResults } from '../../models/Test';
 import DoTestUserForm from './DoTest-Userform-View.js';
 
 class DoTest extends React.Component {
@@ -75,17 +75,28 @@ class DoTest extends React.Component {
     if (!this.state.top_user || testScore > this.state.top_score)
       top_user = window.sessionStorage.getItem('userName');
 
-    let result = submitResult({
-      title: this.state.title,
-      description: this.state.description,
-      questions: this.state.questions,
+    let resultsData = submitResult({
+      id: this.state.testId,
+      result: {
+        title: this.state.title,
+        description: this.state.description,
+        questions: this.state.questions,
 
-      userId: window.sessionStorage.getItem('userId'),
-      userName: window.sessionStorage.getItem('userName'),
-      date: new Date()
+        userId: window.sessionStorage.getItem('userId'),
+        userName: window.sessionStorage.getItem('userName'),
+        date: Date.now()
+      }
     });
 
-    let test = updateTestStats(this.state.testId, {
+    let userResultData = updateUserResults({
+      id: window.sessionStorage.getItem('userId'),
+      testId: this.state.testId,
+      score: testScore,
+      time: 0,
+      date: new Date()
+    })
+
+    let testData = updateTestStats(this.state.testId, {
       title: this.state.title,
       description: this.state.description,
       questions: this.state.questions,
@@ -95,7 +106,7 @@ class DoTest extends React.Component {
       best_time: this.state.best_time
     });
 
-    Promise.all([ result, test ])
+    Promise.all([ resultsData, userResultData, testData ])
       .then(() => this.context.router.push('/'))
       .catch(err => console.error(err));
 

@@ -34,11 +34,11 @@ class TestDetails extends React.Component {
         this.setState({
         title: test.title,
         description: test.description,
-        questionsCount: test.questions && test.questions.length,
-        total_participants: test.total_participants,
+        questionsCount: test.questions && Number(test.questions.length),
+        total_participants: Number(test.total_participants),
         top_user: test.top_user,
-        top_score: test.top_score,
-        best_time: test.best_time
+        top_score: Number(test.top_score),
+        best_time: Number(test.best_time)
       }))
       .catch(err => console.error(err));
   }
