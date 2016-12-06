@@ -12,17 +12,26 @@ function loadUserLog(id) {
 }
 
 function getClientInfo(url, userId) {
-  return new Promise((resolve, reject) => {
-    httpGETClientInfo(url)
-      .then((data) => {
-          return new Promise((resolve, reject) => {
-            httpPOST('appdata', 'userlog', false, { "id": userId, "countryCode": data.countryCode, "country": data.country, "city": data.city, "regionName": data.regionName, "isp": data.isp, "lat": data.lat, "lon": data.lon, "ip": data.query, "timezone": data.timezone, "zip": data.zip })
-                .then(clientInfo => resolve(clientInfo))
-            .catch(err => reject(err));
-          });
-      })
-      .catch(err => reject(err));
-  });
+    return new Promise((resolve, reject) => {
+      httpGETClientInfo(url)
+        .then(data => {
+            httpPOST('appdata', 'userlog', false, {
+              "id": userId,
+              "countryCode": data.countryCode,
+              "country": data.country,
+              "city": data.city,
+              "regionName": data.regionName,
+              "isp": data.isp,
+              "lat": data.lat,
+              "lon": data.lon,
+              "ip": data.query,
+              "timezone": data.timezone,
+              "zip": data.zip })
+              .then(clientInfo => resolve(clientInfo))
+              .catch(err => reject(err));
+            });
+        })
+        .catch(err => console.error(err));
 }
 
-export { getClientInfo, loadUserLog};
+export { getClientInfo, loadUserLog };

@@ -62,7 +62,5 @@ export function httpDELETE(module, url, useBasicAuth = true) {
 }
 
 export function httpGETClientInfo(url) {
-  return $.get({
-    url: url
-  });
+  return $.get({ url: url });
 }

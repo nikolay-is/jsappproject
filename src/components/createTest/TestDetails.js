@@ -50,8 +50,7 @@ class TestDetails extends React.Component {
 
           userTests: userTests
         })
-      .catch(err => console.error(err));
-    });
+    }).catch(err => console.error(err));;
   }
 
   startTest() {

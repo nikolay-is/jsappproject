@@ -69,13 +69,11 @@ class Login extends React.Component {
   }
 
   updateClientInfo(userId) {
-    getClientInfo ('http://ip-api.com/json', userId)
+    getClientInfo('http://ip-api.com/json', userId)
       .then(data => {
         console.log(data);
       })
-      .catch(err => {
-        console.error(err);
-      });
+      .catch(err => {});
   }
 
   render() {

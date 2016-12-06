@@ -5,7 +5,7 @@ class AboutForm extends React.Component {
     return (
       <div id="about" className='col-sm-12'>
         <div className='about-description col-sm-11' style={{float: 'none'}}>
-          <p><pre>{this.props.description}</pre></p>
+          <p>{this.props.description}</p>
         </div>
 
         <div className='about-total-country-code col-sm-10' style={{float: 'none'}}>
@@ -42,8 +42,7 @@ AboutForm.contextTypes = {
 }
 
 AboutForm.propTypes = {
-  busy: React.PropTypes.bool.isRequired,
-  test: React.PropTypes.object.isRequired
+  busy: React.PropTypes.bool.isRequired
 }
 
 AboutForm.defaultProps = {
