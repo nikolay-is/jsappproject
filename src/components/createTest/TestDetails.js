@@ -3,6 +3,7 @@ import React from 'react';
 // import ERR from '../../utilities/err';
 import TestDetailsUserForm from './TestDetails-Userform-View.js';
 import { loadTestDetails } from '../../models/Test';
+import { getUserTests } from '../../models/User';
 
 class TestDetails extends React.Component {
   constructor(props) {
@@ -12,6 +13,9 @@ class TestDetails extends React.Component {
       isLoggedIn: window.sessionStorage.getItem('userId') && true,
       busy: false,
 
+      userTests: [],
+
+      id: '',
       title: '',
       description: '',
       questionsCount: 0,
@@ -29,18 +33,25 @@ class TestDetails extends React.Component {
   componentWillMount() {
     let currentTestId = this.props.params.testId; //'58455cdb00a5907e7dfed67a'
     
-    loadTestDetails(currentTestId)
-      .then(test =>
+    let testDetails = loadTestDetails(currentTestId);
+    let userTests = getUserTests(window.sessionStorage.getItem('userId'));
+
+    Promise.all([ testDetails, userTests ])
+      .then(([ test, userTests ]) => {
         this.setState({
-        title: test.title,
-        description: test.description,
-        questionsCount: test.questions && Number(test.questions.length),
-        total_participants: Number(test.total_participants),
-        top_user: test.top_user,
-        top_score: Number(test.top_score),
-        best_time: Number(test.best_time)
-      }))
+          id: test._id,
+          title: test.title,
+          description: test.description,
+          questionsCount: test.questions && Number(test.questions.length),
+          total_participants: Number(test.total_participants),
+          top_user: test.top_user,
+          top_score: Number(test.top_score),
+          best_time: Number(test.best_time),
+
+          userTests: userTests
+        })
       .catch(err => console.error(err));
+    });
   }
 
   startTest() {
@@ -64,12 +75,15 @@ class TestDetails extends React.Component {
         <TestDetailsUserForm
           busy={this.state.busy}
 
+          testId={this.state.id}
           description={this.state.description}
           questionsCount={this.state.questionsCount}
           total_participants={this.state.total_participants}
           top_user={this.state.top_user}
           top_score={this.state.top_score}
           best_time={this.state.best_time}
+
+          userTests={this.state.userTests}
 
           backButtonPressed={this.backButtonPressed}
           startTest={this.startTest}

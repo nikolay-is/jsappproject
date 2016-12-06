@@ -37,7 +37,7 @@ class TestDetailsUserForm extends React.Component {
         </div>
 
         <div className="action">
-        { this.props.isLoggedIn
+        { this.props.userTests.includes(this.props.testId)
           ? <button className="btn btn-success" onClick={this.props.startTest}>Start test</button>
           : <button className="btn btn-default" onClick={this.props.previewTest}>Preview</button>
         }
@@ -54,12 +54,15 @@ TestDetailsUserForm.contextTypes = {
 TestDetailsUserForm.propTypes = {
   busy: React.PropTypes.bool.isRequired,
 
+  testId: React.PropTypes.string.isRequired,
   description: React.PropTypes.string,
   questionsCount: React.PropTypes.number.isRequired,
   total_participants: React.PropTypes.number.isRequired,
   top_user: React.PropTypes.string.isRequired,
   top_score: React.PropTypes.number.isRequired,
   best_time: React.PropTypes.number.isRequired,
+
+  userTests: React.PropTypes.array.isRequired,
 
   backButtonPressed: React.PropTypes.func.isRequired,
   startTest: React.PropTypes.func.isRequired,
@@ -68,7 +71,8 @@ TestDetailsUserForm.propTypes = {
 
 TestDetailsUserForm.defaultProps = {
   busy: false,
-  description: ''
+  description: '',
+  userTests: []
 }
 
 export default TestDetailsUserForm;
