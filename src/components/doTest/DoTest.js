@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Observer from '../../utilities/observer';
-// import ERR from '../../utilities/err';
-import { getTestData } from '../../models/DoTest';
+import ERR from '../../utilities/err';
+import { loadTestDetails, submitResult, lockTestForUser, updateTestStats } from '../../models/Test';
 import DoTestUserForm from './DoTest-Userform-View.js';
 
 class DoTest extends React.Component {
@@ -14,46 +14,91 @@ class DoTest extends React.Component {
       busy: false,
       testId: this.props.params.id.trim(),
 
-      questions: []
+      title: '',
+      description: '',
+      questions: [],
+
+      total_participants: 0,
+
     };
 
-    this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
     this.onQuestionAnswerChange = this.onQuestionAnswerChange.bind(this);
   }
 
   componentWillMount() {
-    getTestData(this.state.testId)
-      .then(testData => {
-        let nextState = {};
-        nextState.title = testData.title || 'Test Title is Missing!';
-        nextState.questions = testData.questions || [];
-        this.setState(nextState);
+    Observer.onQuestionAnswerChange = this.onQuestionAnswerChange;
+
+    let loadTestData = loadTestDetails(this.state.testId);
+    let userLock = lockTestForUser(this.props.params.id.trim(), window.sessionStorage.getItem('userId'));
+
+    Promise.all([ loadTestData, userLock ])
+      .then(([ testData, lockedUser ]) => {
+        testData.questions.filter(q => q.givenAnswer).forEach(q => delete q.givenAnswer);
+
+        let nextState = {
+          title: testData.title || '',
+          description: testData.description || '',
+          questions: testData.questions || [],
+          total_participants: Number(testData.total_participants) || 0,
+          top_user: testData.top_user || '',
+          top_score: testData.top_score || 0,
+          best_time: testData.best_time || 0
+        };
+
+        if ( !(testData.title && testData.questions && testData.questions.length) ) {
+          console.error(ERR.BAD_TEST);
+          this.context.router.push('/');
+        } else {
+          this.setState(nextState);
+        }
       })
       .catch(err => console.error(err));
-
-    Observer.onQuestionAnswerChange = this.onQuestionAnswerChange;
   }
 
   onQuestionAnswerChange(ev) {
     let questions = this.state.questions;
-    let idx = Number(ev.target.attributes['data-id'].value);
-    questions[idx][ev.target.name] = ev.target.value;
+    let q = Number(ev.target.attributes['data-id'].value);    // Question num
+    let a = 'Answer ' + (Number(ev.target.id.slice(1)) + 1);
+    questions[q].givenAnswer = a;
 
     this.setState({ questions: questions });
-
-    ev.preventDefault();    
-  }
-
-  onChangeHandler(ev) {
-    let nextState = {};
-    nextState[ev.target.name] = ev.target.value;
-    this.setState(nextState);
-    
-    ev.preventDefault();
   }
 
   onSubmitHandler(ev) {
+    let testScore = 0;
+
+    this.state.questions
+      .forEach(q => q.givenAnswer && q.givenAnswer === q.answer && ++testScore);
+
+    let top_user = this.state.top_user || ''
+    if (!this.state.top_user || testScore > this.state.top_score)
+      top_user = window.sessionStorage.getItem('userName');
+
+    let result = submitResult({
+      title: this.state.title,
+      description: this.state.description,
+      questions: this.state.questions,
+
+      userId: window.sessionStorage.getItem('userId'),
+      userName: window.sessionStorage.getItem('userName'),
+      date: new Date()
+    });
+
+    let test = updateTestStats(this.state.testId, {
+      title: this.state.title,
+      description: this.state.description,
+      questions: this.state.questions,
+      total_participants: this.state.total_participants + 1,
+      top_user: top_user,
+      top_score: Math.max(this.state.top_score, testScore),
+      best_time: this.state.best_time
+    });
+
+    Promise.all([ result, test ])
+      .then(() => this.context.router.push('/'))
+      .catch(err => console.error(err));
+
     ev.preventDefault();
   }
 
@@ -65,12 +110,8 @@ class DoTest extends React.Component {
         <h2>Quiz: {this.state.title}</h2>
         <DoTestUserForm
           busy={this.state.busy}
-
           questions={this.state.questions}
-
-          onChange={this.onChangeHandler}
           onSubmit={this.onSubmitHandler}
-          onAddQuestion={this.onAddQuestion}
         />
       </div>
     );

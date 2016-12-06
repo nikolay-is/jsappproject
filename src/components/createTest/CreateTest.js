@@ -20,11 +20,10 @@ class CreateTest extends React.Component {
         question: '',
         a0: '', a1: '', a2: '', a3: '', answer: 'Answer 1'
       }],
-      total_questions: 0,
       total_participants: 0,      
       top_user: '',
       top_score: 0,
-      best_time: new Date()
+      best_time: 0
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -59,25 +58,31 @@ class CreateTest extends React.Component {
 
   onSubmitHandler(ev) {
     if ( !(this.state.title.length && this.state.description.length && this.state.questions.length >= 5) ) {
-
       alert('Bad Test data');
     } else {
       let startDateTime = this.state.best_time; 
       let endDateTime = new Date();
       let dateDiff = endDateTime - startDateTime;
-      console.log(endDateTime);
-      console.log(startDateTime);
-      console.log(dateDiff); 
-      this.setState({ busy: true });
-      this.setState({ 
-        total_questions: Number(this.state.questions.length),
+
+      this.setState({
+        busy: true,
+        total_questions: this.state.questions.length,
         total_participants: 0,      
         top_user: '',
         top_score: 0,
         best_time: dateDiff        
       });
 
-      create({ title: this.state.title, description: this.state.description, questions: this.state.questions, total_questions: this.state.total_questions, total_participants: this.state.total_participants, top_user: this.state.top_user, top_score: this.state.top_score, best_time: this.state.best_time })
+      create({
+        title: this.state.title,
+        description: this.state.description,
+        questions: this.state.questions,
+        total_questions: this.state.total_questions,
+        total_participants: this.state.total_participants,
+        top_user: this.state.top_user,
+        top_score: this.state.top_score,
+        best_time: this.state.best_time
+      })
         .then(result => {
           this.context.router.push('/');
         })

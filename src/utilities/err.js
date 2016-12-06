@@ -18,6 +18,16 @@ const ERR = {
     status: 610,
     statusText: 'Bad user data received from Kinvey'
   },
+
+  BAD_TEST: {
+    status: 701,
+    statusText: 'Missing title or questions in test template'
+  },
+
+  BAD_TEST_RESULTS: {
+    status: 705,
+    statusText: 'Missing test results data'
+  }
 };
 
 export default ERR;

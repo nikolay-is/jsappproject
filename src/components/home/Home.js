@@ -28,12 +28,12 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h2>Home</h2>
+        <h2>&nbsp;</h2>
           { window.sessionStorage.getItem('userId') &&
             <div className='testList col-sm-12'>
             {
               this.state.tests.map(test => {
-                return <div className='test col-sm-7' key={test._id}>
+                return <div className='test col-sm-10' key={test._id}>
                   <p><strong>{test.title}</strong></p>
                   <p className='description'>{test.description}</p>
                   <Link to={"/tests/" + test._id + "/details"}>Go to test details</Link>

@@ -7,82 +7,102 @@ class Question extends React.Component {
       <fieldset key={this.props.idx}>
         <legend>Question {this.props.idx + 1}</legend>
 
-            <div className='question'>
-              <p className='question'>{this.props.question.question.trim()}</p>
-            </div><br />
+        <div className='question col-sm-9'>
+          <pre>{this.props.question.question.trim()}</pre>
+        </div><br />
 
-            <div className='form-group'>
-              <label htmlFor='a0' className='col-sm-3 control-label'>Answer 1</label>
-                <div className='input-group col-sm-4'>
-                  <div className='input-group-addon'>#</div>
-                  <input
-                    type='text'
-                    className='form-control'
-                    id='a0'
-                    name='a0'
-                    ref='inputA0'
-                    data-id={this.props.idx} 
-                    disabled={this.props.busy}
-                    value={this.props.question['a0']}
-                    onChange={Observer.onQuestionAnswerChange}
-                  />
-                </div>
-            </div><br />
-
-            <div className='form-group'>
-              <label htmlFor='a1' className='col-sm-3 control-label'>Answer 2</label>
-                <div className='input-group col-sm-4'>
-                  <div className='input-group-addon'>#</div>
-                  <input
-                    type='text'
-                    className='form-control'
-                    id='a1'
-                    name='a1'
-                    ref='inputA1'
-                    data-id={this.props.idx} 
-                    disabled={this.props.busy}
-                    value={this.props.question['a1']}
-                    onChange={Observer.onQuestionAnswerChange}
-                  />
-                </div>
-            </div><br />
-
-            <div className='form-group'>
-              <label htmlFor='a2' className='col-sm-3 control-label'>Answer 3</label>
-                <div className='input-group col-sm-4'>
-                  <div className='input-group-addon'>#</div>
-                  <input
-                    type='text'
-                    className='form-control'
-                    id='a2'
-                    name='a2'
-                    ref='inputA2'
-                    data-id={this.props.idx} 
-                    disabled={this.props.busy}
-                    value={this.props.question['a2']}
-                    onChange={Observer.onQuestionAnswerChange}
-                  />
-                </div>
-            </div><br />
-
-            <div className='form-group'>
-              <label htmlFor='a3' className='col-sm-3 control-label'>Answer 4</label>
-                <div className='input-group col-sm-4'>
-                  <div className='input-group-addon'>#</div>
-                  <input
-                    type='text'
-                    className='form-control'
-                    id='a3'
-                    name='a3'
-                    ref='inputA3'
-                    data-id={this.props.idx} 
-                    disabled={this.props.busy}
-                    value={this.props.question['a3']}
-                    onChange={Observer.onQuestionAnswerChange}
-                  />
-                </div>
-            </div><br />
-
+        <div className='test-answers'>
+          { this.props.question['a0'] && this.props.question['a0'] !== 'XXX' &&
+            <label className='col-sm-8' style={{float:'none'}}>
+              1: <input
+                type='radio'
+                className=''
+                id='a0'
+                name={this.props.idx}
+                data-id={this.props.idx} 
+                disabled={this.props.busy}
+                value={this.props.question['a0']}
+                onChange={Observer.onQuestionAnswerChange}
+                checked={'' + this.props.checked === '0' ? true : false}
+              /> {this.props.question['a0']}
+            </label>
+          }
+          { this.props.question['a1'] && this.props.question['a1'] !== 'XXX' &&
+            <label className='col-sm-8' style={{float:'none'}}>
+              2: <input
+                type='radio'
+                className=''
+                id='a1'
+                name={this.props.idx}
+                data-id={this.props.idx} 
+                disabled={this.props.busy}
+                value={this.props.question['a1']}
+                onChange={Observer.onQuestionAnswerChange}
+                checked={'' + this.props.checked === '1' ? true : false}
+              /> {this.props.question['a1']}
+            </label>
+          }
+          { this.props.question['a2'] && this.props.question['a2'] !== 'XXX' &&
+            <label className='col-sm-8' style={{float:'none'}}>
+              3: <input
+                type='radio'
+                className=''
+                id='a2'
+                name={this.props.idx}
+                data-id={this.props.idx} 
+                disabled={this.props.busy}
+                value={this.props.question['a2']}
+                onChange={Observer.onQuestionAnswerChange}
+                checked={'' + this.props.checked === '2' ? true : false}
+              /> {this.props.question['a2']}
+            </label>
+          }
+          { this.props.question['a3'] && this.props.question['a3'] !== 'XXX' &&
+            <label className='col-sm-8' style={{float:'none'}}>
+              4: <input
+                type='radio'
+                className=''
+                id='a3'
+                name={this.props.idx}
+                data-id={this.props.idx} 
+                disabled={this.props.busy}
+                value={this.props.question['a3']}
+                onChange={Observer.onQuestionAnswerChange}
+                checked={'' + this.props.checked === '3' ? true : false}
+              /> {this.props.question['a3']}
+            </label>
+          }
+          { this.props.question['a4'] && this.props.question['a4'] !== 'XXX' &&
+            <label className='col-sm-8' style={{float:'none'}}>
+              5: <input
+                type='radio'
+                className=''
+                id='a4'
+                name={this.props.idx}
+                data-id={this.props.idx} 
+                disabled={this.props.busy}
+                value={this.props.question['a4']}
+                onChange={Observer.onQuestionAnswerChange}
+                checked={'' + this.props.checked === '4' ? true : false}
+              /> {this.props.question['a4']}
+            </label>
+          }
+          { this.props.question['a5'] && this.props.question['a5'] !== 'XXX' &&
+            <label className='col-sm-8' style={{float:'none'}}>
+              6: <input
+                type='radio'
+                className=''
+                id='a5'
+                name={this.props.idx}
+                data-id={this.props.idx} 
+                disabled={this.props.busy}
+                value={this.props.question['a5']}
+                onChange={Observer.onQuestionAnswerChange}
+                checked={'' + this.props.checked === '5' ? true : false}
+              /> {this.props.question['a5']}
+            </label>
+          }
+        </div>
       </fieldset>
     );
   }

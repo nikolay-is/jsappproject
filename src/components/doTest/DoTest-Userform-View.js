@@ -14,7 +14,13 @@ class DoTestUserForm extends React.Component {
         <form className='form-horizontal' onSubmit={this.props.onSubmit} >
           {
             this.props.questions
-              .map((q, idx) => <Question disabled={this.props.busy} key={idx} question={q} idx={idx} />)
+              .map((q, idx) => <Question
+                disabled={this.props.busy}
+                key={idx}
+                question={q}
+                idx={idx}
+                checked={this.props.questions[idx].givenAnswer && Number(this.props.questions[idx].givenAnswer.slice(-1)) - 1}
+              />)
           }
 
           <div className='form-group'>
@@ -29,7 +35,6 @@ class DoTestUserForm extends React.Component {
 DoTestUserForm.propTypes = {
   busy: React.PropTypes.bool.isRequired,
   questions: React.PropTypes.array.isRequired,
-  onChange: React.PropTypes.func.isRequired,
   onSubmit: React.PropTypes.func.isRequired
 }
 
