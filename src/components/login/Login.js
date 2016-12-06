@@ -4,6 +4,7 @@ import Observer from '../../utilities/observer';
 import ERR from '../../utilities/err';
 import { userLogin } from '../../models/User';
 import LoginUserForm from './Login-Userform-View';
+import { getClientInfo } from '../../models/UserLog';
 
 class Login extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class Login extends React.Component {
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
     this.saveSession = this.saveSession.bind(this);
+    this.updateClientInfo = this.updateClientInfo.bind(this);
   }
 
   onChangeHandler(ev) {
@@ -62,6 +64,18 @@ class Login extends React.Component {
     window.sessionStorage.setItem('userId', userId);
     window.sessionStorage.setItem('userName', userName);
     window.sessionStorage.setItem('authToken', authToken);
+
+    this.updateClientInfo(userId);
+  }
+
+  updateClientInfo(userId) {
+    getClientInfo ('http://ip-api.com/json', userId)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   render() {

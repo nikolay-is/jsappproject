@@ -60,3 +60,9 @@ export function httpDELETE(module, url, useBasicAuth = true) {
     headers: headers
   });
 }
+
+export function httpGETClientInfo(url) {
+  return $.get({
+    url: url
+  });
+}
