@@ -104,6 +104,34 @@ function loadTestDetails(id) {
   })
 }
 
+function findTestInResults(id) {
+  let resultId = undefined;
+
+  return new Promise((resolve, reject) => {
+    httpGET('appdata', 'results', false)
+      .then(results => {
+        for (let result of results)
+          if (id === result.id) {
+            resultId = result._id; break;
+          }
+
+        if (resultId)
+          resolve(resultId);
+        else
+          resolve(false);
+      })
+      .catch(err => reject(err));
+  });
+}
+
+function loadUserTestResults(resultId) {
+  return new Promise((resolve, reject) => {
+    httpGET('appdata', 'results/' + resultId, false)
+      .then(testResults => resolve(testResults))
+      .catch(err => reject(err));
+  });
+}
+
 function updateUserResults(results) {
   if ( !(results.id && results.testId && results.date) )
     return new Promise((resolve, reject) => {
@@ -138,4 +166,13 @@ function validate(what, regex) {
   return regex.test(what);
 }
 
-export { loadTestDetails, getTests, create, submitResult, lockTestForUser, updateTestStats, updateUserResults };
+export {  loadTestDetails,
+          getTests,
+          create,
+          submitResult,
+          lockTestForUser,
+          updateTestStats,
+          updateUserResults,
+          findTestInResults,
+          loadUserTestResults
+};

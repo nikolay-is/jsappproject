@@ -12,14 +12,13 @@ class DoTest extends React.Component {
     this.state = {
       isLoggedIn: window.sessionStorage.getItem('userId') && true,
       busy: false,
-      testId: this.props.params.id.trim(),
+      testId: this.props.params.testId.trim(),
 
       title: '',
       description: '',
       questions: [],
 
-      total_participants: 0,
-
+      total_participants: 0
     };
 
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -30,7 +29,7 @@ class DoTest extends React.Component {
     Observer.onQuestionAnswerChange = this.onQuestionAnswerChange;
 
     let loadTestData = loadTestDetails(this.state.testId);
-    let userLock = lockTestForUser(this.props.params.id.trim(), window.sessionStorage.getItem('userId'));
+    let userLock = lockTestForUser(this.props.params.testId.trim(), window.sessionStorage.getItem('userId'));
 
     Promise.all([ loadTestData, userLock ])
       .then(([ testData, lockedUser ]) => {

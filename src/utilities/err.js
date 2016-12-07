@@ -27,6 +27,11 @@ const ERR = {
   BAD_TEST_RESULTS: {
     status: 705,
     statusText: 'Missing test results data'
+  },
+
+  CANNOT_FIND_TEST_RESULT: {
+    status: 801,
+    statusText: 'Missing test results data'
   }
 };
 

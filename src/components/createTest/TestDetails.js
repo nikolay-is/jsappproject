@@ -54,11 +54,11 @@ class TestDetails extends React.Component {
   }
 
   startTest() {
-    console.log('startTest()');
+    this.context.router.push('/tests/' + this.state.id + '/perform');
   }
 
   previewTest() {
-    console.log('previewTest()');
+    this.context.router.push('/tests/' + this.state.id + '/results');
   }
 
   backButtonPressed() {
@@ -68,8 +68,10 @@ class TestDetails extends React.Component {
   render() {
     if (!this.state.isLoggedIn) this.context.router.push('/');
 
+    let hidden = this.state.userTests.length ? false : true;
+
     return (
-      <div>
+      <div className={(hidden ? 'hidden' : 'opaque') + ' animate'}>
         <h2>Test: {this.state.title}</h2>
         <TestDetailsUserForm
           busy={this.state.busy}

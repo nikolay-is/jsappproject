@@ -9,7 +9,7 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      isLoggedIn: window.sessionStorage.getItem('userId') || undefined,
+      isLoggedIn: window.sessionStorage.getItem('userId') || false,
 
       tests: [],
       userTests: []
@@ -22,12 +22,14 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
-    let userTestsPromise = getUserTests(window.sessionStorage.getItem('userId'));
-    let testsPromise = getTests();
+    if (this.state.isLoggedIn) {
+      let userTestsPromise = getUserTests(window.sessionStorage.getItem('userId'));
+      let testsPromise = getTests();
 
-    Promise.all([ userTestsPromise, testsPromise ])
-      .then(([ userTests, tests ]) => this.setState({ tests: tests, userTests: userTests }))
-      .catch(err => console.error(err));
+      Promise.all([ userTestsPromise, testsPromise ])
+        .then(([ userTests, tests ]) => this.setState({ tests: tests, userTests: userTests }))
+        .catch(err => console.error(err));
+    }
   }
 
   testLocked(testId) {
@@ -67,8 +69,10 @@ testGetDate(testId) {
   }
 
   render() {
+    let hidden = this.state.userTests.length ? false : true;
+
     return (
-      <div id='home-content' className='col-sm-12'>
+      <div id='home-content' className={'col-sm-12 ' + (hidden ? 'hidden' : 'opaque')}>
         <h2>&nbsp;</h2>
           { window.sessionStorage.getItem('userId') &&
             <div className='testList col-sm-12'>

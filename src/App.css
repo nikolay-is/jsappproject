@@ -28,13 +28,54 @@ pre {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+.hidden {
+  opacity: 0.01;
+  width: 1px;
+  height: 1px;
+  transition: all 1s ease;
+}
+
+.opaque {
+  opacity: 1;
+  transition: all 1s ease;
+}
+
+.correct {
+  display: block;
+  font-size: 1.1em;
+  color: aliceblue;
+  margin: 5px;
+  padding: 15px 7px;
+  border-radius: 2px 50% 50% 2px;
+  background-color: darkgreen;
+  box-shadow: 3px 3px 4px rgba(30, 30, 30, .75);
+}
+
+.wrong {
+  display: block;
+  font-size: 1.1em;
+  color: aliceblue;
+  margin: 5px;
+  padding: 15px 7px;
+  border-radius: 2px 50% 50% 2px;
+  background-color: darkred;
+  box-shadow: 3px 3px 4px rgba(30, 30, 30, .75);
+}
+
+.blank {
+  display: block;
+  font-size: 1.1em;
+  margin: 5px;
+  padding: 15px 7px;
+}
+
 /* Header */
 .header-div {
   min-width: 100%;
   color: white;
   font-weight: bold;
   background-color: rgba(30, 30, 30, .95);
-  margin: 0;
+  margin: 0 0 40px;
   padding: 10px 5px;
   display: inline-block;
   border-radius: 4px;
@@ -62,6 +103,7 @@ pre {
 /* Home */
 div#home-content {
   display: inline-block;
+  transition: all .5s ease-in;
 }
 
 div#home-foreground-img {
@@ -116,9 +158,11 @@ p.home-test-status > span {
 
 /* Test Details */
 #test-details {
+  padding: 20px;
   color: white;
   background-color: rgba(30, 30, 30, 1);
   border-radius: 4px;
+  box-shadow: 5px 5px 8px rgba(30, 30, 30, .75);
 }
 
 #test-details > div {
@@ -130,12 +174,24 @@ p.home-test-status > span {
   box-shadow: 2px 2px 4px green;
 }
 
+div#test-details-btn-container {
+  margin-top: 40px;
+  border: 1px solid transparent;
+  background-color: rgba(30, 30, 30, .5);
+  box-shadow: 2px 2px 4px 2px rgba(30, 30, 30, .75);
+}
+
+div#test-details-btn-container > button {
+  margin: 0 7px;
+  float: right;
+}
+
 #test-details > div > p > span {
   display: inline-block;
   text-align: right;
 }
 
-#test-details > .test-details-description > p > pre {
+#test-details > .test-details-description > pre {
   color: aliceblue;
   font-family: cursive;
   padding: 0 10px;
@@ -208,6 +264,32 @@ div.question > pre {
   color: #222;
   font-size: 1.4em;
   font-weight: bold;
+}
+
+/* Result Details */
+div#user-test-result {
+  color: black;
+}
+
+div.user-test-result-description {
+  padding: 20px 20px 40px 20px;
+  border: 1px solid #222;
+  border-radius: 4px;
+  color: white;
+  /*background-color: rgba(30, 30, 30, 0.25);*/
+  font-size: 1.2em;
+  /*box-shadow: 4px 4px 8px rgba(30, 30, 30, 0.9);*/
+  box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.3) inset, 4px 4px 8px rgba(30, 30, 30, 0.9);
+}
+
+p.user-test-result-question {
+  color: #222;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+div.user-test-result-correct {
+  margin-top: 20px;
 }
 
 /* ReactJS logo */

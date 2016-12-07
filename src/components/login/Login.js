@@ -42,7 +42,7 @@ class Login extends React.Component {
         this.context.router.push('/');
       })
       .catch(err => {
-        console.error(err);
+        console.error(err.status, err.statusText);
         this.setState({
           busy: false,
           username: '',

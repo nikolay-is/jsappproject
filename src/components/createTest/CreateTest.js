@@ -33,7 +33,6 @@ class CreateTest extends React.Component {
   }
 
   componentWillMount() {
-    console.log('did mount')
     Observer.onQuestionChange = this.onQuestionChange;
   }
 
