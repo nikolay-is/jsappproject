@@ -72,10 +72,9 @@ testGetDate(testId) {
     let hidden = this.state.userTests.length ? false : true;
 
     return (
-      <div id='home-content' className={'col-sm-12 ' + (hidden ? 'hidden' : 'opaque')}>
-        <h2>&nbsp;</h2>
+      <div id='home-content' className='col-sm-12'>
           { window.sessionStorage.getItem('userId') &&
-            <div className='testList col-sm-12'>
+            <div className={'testList col-sm-12 ' + (hidden ? 'hidden' : 'opaque')}>
             {
               this.state.tests.map(test => {
                 return (<div className='test col-sm-12' key={test._id}>
@@ -97,7 +96,10 @@ testGetDate(testId) {
           }
           {
             !window.sessionStorage.getItem('userId') &&
-            <div id='home-foreground-img' className=''></div>
+            <div id='home-foreground-img' className=''>
+              <img src='foreground.jpg' className='col-sm-12' style={{'opacity': '1'}} />
+              <div className='foreground-img-caption'>Quiz<br />Machine</div>
+            </div>
           }
       </div>
     );
