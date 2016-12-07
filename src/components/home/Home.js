@@ -10,6 +10,7 @@ class Home extends React.Component {
 
     this.state = {
       isLoggedIn: window.sessionStorage.getItem('userId') || false,
+      isFetching: true,
 
       tests: [],
       userTests: []
@@ -27,7 +28,11 @@ class Home extends React.Component {
       let testsPromise = getTests();
 
       Promise.all([ userTestsPromise, testsPromise ])
-        .then(([ userTests, tests ]) => this.setState({ tests: tests, userTests: userTests }))
+        .then(([ userTests, tests ]) => this.setState({
+          tests: tests,
+          userTests: userTests,
+          isFetching: false
+        }))
         .catch(err => console.error(err));
     }
   }
@@ -69,7 +74,7 @@ testGetDate(testId) {
   }
 
   render() {
-    let hidden = this.state.userTests.length ? false : true;
+    let hidden = this.state.isFethching ? true : false;
 
     return (
       <div id='home-content' className='col-sm-12'>
@@ -97,7 +102,7 @@ testGetDate(testId) {
           {
             !window.sessionStorage.getItem('userId') &&
             <div id='home-foreground-img' className=''>
-              <img src='foreground.jpg' className='col-sm-12' style={{'opacity': '1'}} />
+              <img src='foreground.jpg' className='col-sm-12' style={{'opacity': '1'}} alt='Pic' />
               <div className='foreground-img-caption'>Quiz<br />Machine</div>
             </div>
           }

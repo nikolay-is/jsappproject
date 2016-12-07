@@ -11,6 +11,7 @@ class TestDetails extends React.Component {
 
     this.state = {
       isLoggedIn: window.sessionStorage.getItem('userId') && true,
+      isFetching: true,
       busy: false,
 
       userTests: [],
@@ -39,6 +40,7 @@ class TestDetails extends React.Component {
     Promise.all([ testDetails, userTests ])
       .then(([ test, userTests ]) => {
         this.setState({
+          isFetching: false,
           id: test._id,
           title: test.title,
           description: test.description,
@@ -68,7 +70,7 @@ class TestDetails extends React.Component {
   render() {
     if (!this.state.isLoggedIn) this.context.router.push('/');
 
-    let hidden = this.state.userTests.length ? false : true;
+    let hidden = this.state.isFetching ? true : false;
 
     return (
       <div className={(hidden ? 'hidden' : 'opaque') + ' animate'}>
