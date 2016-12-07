@@ -214,6 +214,36 @@ div#test-details-btn-container > button {
   font-size: 1.1em;
 }
 
+/* About */
+.user-log-table{
+  text-align: center;
+  margin: 0 auto 3px;
+}
+
+.user-log-table tr {
+  padding: 25px 50px;  
+  font-size: 1.1em;
+  color: firebrick;
+  border: 1px solid darkolivegreen;
+  box-shadow: 2px 2px 4px green;
+}
+
+.user-log-table tr th {
+  padding: 0.5em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.user-log-table tr td {
+  padding: 0.1em;
+  transition: font-size 0.2s;
+}
+.user-log-table tr:first-child {
+  text-shadow: 2px 2px 5px  darkolivegreen;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
 /* Forms */
 .form-container {
   text-align: left;

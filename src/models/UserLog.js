@@ -5,7 +5,7 @@ import { httpGETClientInfo, httpPOST,  httpGET } from '../utilities/util';
 
 function loadUserLog(id) {
   return new Promise((resolve, reject) => {
-    httpGET('appdata', 'userlog/?query={"id":"' + id +'"}', false)
+    httpGET('appdata', 'userlog/?query={"id":"' + id +'"}&sort={"_kmd.ect": -1}', false)
       .then(userlogData => resolve(userlogData))
       .catch(err => reject(err));
   })

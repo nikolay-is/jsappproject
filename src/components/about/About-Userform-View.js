@@ -2,36 +2,43 @@ import React from 'react';
 
 class AboutForm extends React.Component {
   render() {
+    let tableRows = this.props.userlogs.map((userLog, idx) =>
+        <tr key={userLog._id}>
+            <td>{userLog.ip}</td>
+            <td>{userLog.countryCode}</td>
+            <td>{userLog.country}</td>
+            <td>{userLog.city}</td>
+            <td>{userLog.regionName}</td>
+            <td>{userLog.isp}</td>
+            <td>{userLog.timezone}</td>
+            <td>{userLog.lat}</td>
+            <td>{userLog.lon}</td>
+            <td>{userLog._kmd.ect}</td>
+            <td>{userLog.zip}</td>
+        </tr>)
+
     return (
       <div id="about" className='col-sm-12'>
-        <div className='about-description col-sm-11' style={{float: 'none'}}>
-          <p>{this.props.description}</p>
-        </div>
-
-        <div className='about-total-country-code col-sm-10' style={{float: 'none'}}>
-          <p className='col-sm-4' style={{float: 'none'}}>Country Code:
-            <span className='col-sm-1' style={{float: 'none'}}>{this.props.countryCode}</span>
-          </p>
-        </div>
-
-        <div className='about-total-country col-sm-10' style={{float: 'none'}}>
-          <p className='col-sm-4' style={{float: 'none'}}>Country:
-            <span className='col-sm-1' style={{float: 'none'}}>{this.props.country}</span>
-          </p>
-        </div>
-
-        <div className='about-city' style={{float: 'none'}}>
-          <p>City: <span>{this.props.city}</span></p>
-        </div>
-
-        <div className='about-region-name' style={{float: 'none'}}>
-          <p>Region Name: <span>{this.props.regionName}</span></p>
-        </div>
-
-        <div className='about-isp' style={{float: 'none'}}>
-          <p>Internet Provider: <span>{this.props.isp}</span></p>
-        </div>
-
+        <table className="user-log-table">
+            <thead>
+                <tr>
+                    <th>Ip address</th>                
+                    <th>Country Code</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>Region Name</th>
+                    <th>Internet provider</th>
+                    <th>Time Zone</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Login Time UTC</th>                    
+                    <th>Zip code</th>
+                </tr>
+            </thead>
+            <tbody>
+              {tableRows}
+            </tbody>
+        </table>
       </div>
     );
   }

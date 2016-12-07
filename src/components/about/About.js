@@ -12,16 +12,7 @@ class UserLog extends React.Component {
       isLoggedIn: window.sessionStorage.getItem('userId') && true,
       busy: false,
 
-      countryCode: '',
-      country: '',
-      city: '',
-      regionName: '',
-      isp: '',
-      lat: '',
-      lon: '',
-      ip: '',
-      timezone: '',
-      zip: ''
+      userlogs: []
     };
 
   }
@@ -34,50 +25,46 @@ class UserLog extends React.Component {
           console.log(userLog);
           this.setState({
             isLoggedIn: true,
-
-            countryCode: userLog.countryCode,
-            country: userLog.country,
-            city: userLog.city,
-            regionName: userLog.regionName,
-            isp: userLog.isp,
-            lat: userLog.lat,
-            lon: userLog.lon,
-            ip: userLog.ip,
-            timezone: userLog.timezone,
-            zip: userLog.zip,
+            userlogs: userLog
           })
         })
         .catch(err => console.error(err));
      } else {
-       this.setState({ isLoggedIn: false });
+       this.setState({ isLoggedIn: false,  userlogs: [] });
      }
   }
 
   render() {
-//   <h2>Test: {this.state.title}</h2>
     if (!this.state.isLoggedIn) {
-      return null;
+      return (
+        <div>
+          <h2>SPA (Single-Page Application)</h2>
+          <h3>1.	Technologies</h3>
+          <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o	JavaScript:</h4>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>•	AJAX, REST </strong> for communication to external api and the <strong>back-end.</strong></p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>•	ReactJS </strong> for rendering the templates for the  <strong>UI.</strong></p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>•	Models, Views, Controllers, Services, Helpers  </strong> and  <strong>Entities.</strong></p>
+          <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o	HTML & CSS:</h4>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>•	Bootstrap.</strong></p>
+          <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o	Kinvey :</h4>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>•	Kinvey</strong> – for <strong>back-end </strong> and <strong>Kinvey API.</strong></p>
+          <h3>2.	Open-source</h3>
+          <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o	<strong>Source Control System</strong></h4>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>•	Source code </strong> is public on <strong>GitHub.</strong></p>
+          <h3>3.	Functionality</h3>
+          <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o	<strong>User management</strong></h4>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>•	User registration, login</strong> and <strong>logout.</strong></p>
+          <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o	<strong>CRUD operation.</strong></h4>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>•	Create, Edit, View and Delete.</strong></p>
+        </div>
+        )
     } else {
       return (
         <div>
-      
+          <h2>Login statistics</h2>
           <AboutForm
             busy={this.state.busy}
-
-            countryCode={this.state.countryCode}
-            country={this.state.country}
-            city={this.state.city}
-            regionName={this.state.regionName}
-            isp={this.state.isp}
-            lat={this.state.lat}
-            lon={this.state.lon}
-            ip={this.state.ip}
-            timezone={this.state.timezone}
-            ziplat={this.state.zip}
-
-            // backButtonPressed={this.backButtonPressed}
-            // startTest={this.startTest}
-            // previewTest={this.previewTest}
+            userlogs={this.state.userlogs}
           />
         </div>
       );
